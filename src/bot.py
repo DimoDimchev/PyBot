@@ -97,8 +97,8 @@ def add_coin_to_list(update, context):
 
     if len(context.args) > 0:
         for coin in context.args:
-            attempt_to_add = add_coin(coin, user)
-            if attempt_to_add:
+            added = add_coin(coin, user)
+            if added:
                 context.bot.send_message(chat_id=chat,
                                          text=f"✅ Successfully added {coin} to list of currencies")
             else:
@@ -115,8 +115,8 @@ def remove_coin_from_list(update, context):
     chat = update.effective_chat.id
     if len(context.args) > 0:
         for coin in context.args:
-            attempt_to_remove = remove_coin(coin, user)
-            if attempt_to_remove:
+            removed = remove_coin(coin, user)
+            if removed:
                 context.bot.send_message(chat_id=chat,
                                          text=f"✅ Successfully removed {coin} from list of currencies")
             else:
