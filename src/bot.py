@@ -36,7 +36,7 @@ def update(update, context):
                                  text='✅ You will now be updated on the latest prices of your selected crypto')
 
         # add a job to the job_queue which will repeat itself every 7200 seconds
-        context.job_queue.run_repeating(update_crypto_data_periodically, interval=7200, first=0,
+        context.job_queue.run_repeating(update_crypto_data_periodically, interval=7200, first=1,
                                         context=[chat, user])
     else:
         context.bot.send_message(chat_id=chat,
@@ -53,7 +53,7 @@ def call(update, context):
                                  text='✅ You will now get calls if there is a drastic change in price in one of your selected crypto')
 
         # add a job to the job queue which will repeat itself every 81 seconds
-        context.job_queue.run_repeating(check_for_drastic_changes, interval=81, first=0,
+        context.job_queue.run_repeating(check_for_drastic_changes, interval=81, first=1,
                                         context=user)
     else:
         context.bot.send_message(chat_id=chat,
@@ -70,7 +70,7 @@ def news(update, context):
                                  text='✅ You will now get news updates 4 times a day')
 
         # add a job to the job queue which will repeat itself every 21600 seconds
-        context.job_queue.run_repeating(check_for_hot_news, interval=21600, first=0,
+        context.job_queue.run_repeating(check_for_hot_news, interval=21600, first=1,
                                         context=chat)
     else:
         context.bot.send_message(chat_id=chat,

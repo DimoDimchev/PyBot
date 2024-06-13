@@ -9,7 +9,7 @@ password_db = urllib.parse.quote_plus(os.environ['DB_PASS'])
 user_db = urllib.parse.quote_plus(os.environ['DB_USER'])
 
 client = pymongo.MongoClient(
-    f"mongodb+srv://{user_db}:{password_db}@pykocluster.gqxpp.mongodb.net/pykoDB?retryWrites=true&w=majority")
+    f"mongodb+srv://{user_db}:{password_db}@pykocluster0.iicmhy2.mongodb.net/?retryWrites=true&w=majority&appName=PykoCluster0")
 db = client["pykoDB"]
 collection = db["users"]
 
@@ -75,9 +75,8 @@ def strip_from_bad_chars(str):
 # fetch price info for the currencies in the user's watchlist via the CryptoCompare API
 def get_prices(user):
     crypto_data = requests.get(
-        "https://min-api.cryptocompare.com/data/pricemultifull?fsyms={}&tsyms=USD".format(
-            ",".join(user_dict[user][0]))).json()[
-        "RAW"]
+        "https://min-api.cryptocompare.com/data/pricemultifull?fsyms={}&tsyms=USD&api_key={}".format(
+            ",".join(user_dict[user][0]), os.environ.get("API_KEY"))).json()["RAW"]
 
     data = {}
     for i in crypto_data:
